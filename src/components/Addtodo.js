@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import {View, TextInput, Button, StyleSheet, Alert} from 'react-native';
+import {View, TextInput, StyleSheet, Alert, Keyboard} from 'react-native';
 import {AntDesign} from '@expo/vector-icons';
 
+
 import {THEME} from "../theme";
+import {AppButton} from "./ui/AppButton";
 
 export const AddToDo = ({onSubmit}) => {
     const [val, setValue] = useState('');
@@ -13,6 +15,7 @@ export const AddToDo = ({onSubmit}) => {
         } else {
             onSubmit(val);
             setValue('');
+            Keyboard.dismiss();
         }
 
     }
@@ -27,9 +30,9 @@ export const AddToDo = ({onSubmit}) => {
                 autoCorrect ={false}
                 autoCopitaliza = "sentences"
             />
-            <AntDesign.Button onPress={pressHandler} name='pluscircleo'>
-                Добавить
-            </AntDesign.Button>
+            <AppButton onPress={pressHandler}>
+                <AntDesign name='plus' size={30}/>
+            </AppButton>
             {/*<Button title="Добавить" onPress={pressHandler} />*/}
         </View>
     )
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     input: {
-        width: '60%',
+        width: '75%',
         borderBottomColor: THEME.MAIN_COLOR,
         borderStyle: 'solid',
         borderBottomWidth: 1.5,
